@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semata · June–July 2026 Workplan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f9f9f8;
+      --bg2:       #f2f2f0;
+      --surface:   #ffffff;
+      --surface2:  #f4f3f8;
+      --pink:      #f91e5e;
+      --pink-soft: rgba(249, 30, 94, 0.08);
+      --pink-glow: rgba(249, 30, 94, 0.05);
+      --white:     #1a1a2e;
+      --muted:     #6b6b80;
+      --border:    rgba(0, 0, 0, 0.08);
+      --border2:   rgba(0, 0, 0, 0.06);
+      --june:      #4f63e0;
+      --june-soft: rgba(79, 99, 224, 0.1);
+      --july:      #7c5cbf;
+      --july-soft: rgba(124, 92, 191, 0.1);
+      --ongoing:   #0f9d6d;
+      --ongoing-soft: rgba(15, 157, 109, 0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: relative;
+      z-index: 1;
+      padding: 32px 48px 28px;
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #1a1a2e;
+    }
+    .period-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pink);
+      background: var(--pink-soft);
+      border: 1px solid rgba(249,30,94,0.3);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .focus-line {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 560px;
+    }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      position: relative;
+      z-index: 1;
+      padding: 12px 48px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .progress-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .progress-track {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), #ff6b9d);
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 0 8px rgba(249,30,94,0.5);
+    }
+    .progress-pct {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--pink);
+      min-width: 36px;
+      text-align: right;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      position: relative;
+      z-index: 1;
+      padding: 20px 48px 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+    .filter-btn.active { background: var(--pink); border-color: var(--pink); color: white; }
+    .filter-btn.active.june-btn { background: var(--june); border-color: var(--june); }
+    .filter-btn.active.july-btn { background: var(--july); border-color: var(--july); }
+    .filter-btn.active.ongoing-btn { background: var(--ongoing); border-color: var(--ongoing); color: #0c0125; }
+
+    /* ── Main ── */
+    .main {
+      position: relative;
+      z-index: 1;
+      padding: 32px 48px 0;
+      max-width: 860px;
+    }
+
+    /* ── North star ── */
+    .north-star {
+      background: var(--pink-glow);
+      border: 1px solid rgba(249,30,94,0.25);
+      border-left: 3px solid var(--pink);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .north-star-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 8px;
+    }
+    .north-star p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #2a1a3e;
+      font-style: italic;
+    }
+
+    /* ── Positioning callout ── */
+    .positioning {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .positioning-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .positioning p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .positioning strong { color: var(--white); }
+    .signal-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .chip {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 11px;
+      border-radius: 99px;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 28px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border2);
+    }
+    .toggle-icon {
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      transition: transform 0.2s;
+    }
+    .section.collapsed .toggle-icon { transform: rotate(-90deg); }
+    .section.collapsed .tasks { display: none; }
+
+    /* ── Tasks ── */
+    .tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .task:hover {
+      border-color: rgba(249,30,94,0.2);
+      background: #fdfcff;
+    }
+    .task.done {
+      opacity: 0.4;
+    }
+    .task.done .task-title { text-decoration: line-through; }
+
+    /* Checkbox */
+    .check {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: all 0.15s;
+      background: transparent;
+    }
+    .check.checked {
+      background: var(--pink);
+      border-color: var(--pink);
+      box-shadow: 0 0 8px rgba(249,30,94,0.4);
+    }
+    .check.checked::after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 9px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+
+    .task-body { flex: 1; min-width: 0; }
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 5px;
+    }
+    .task-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+    }
+    .task-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Badges */
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .badge-june    { background: var(--june-soft);    color: var(--june); }
+    .badge-july    { background: var(--july-soft);    color: var(--july); }
+    .badge-ongoing { background: var(--ongoing-soft); color: var(--ongoing); }
+
+    .dep-tag {
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border2);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* ── August preview ── */
+    .august {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .august-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 12px;
+    }
+    .august-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .august-item {
+      font-size: 12px;
+      font-weight: 500;
+      color: #aaa;
+      background: var(--bg);
+      padding: 5px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+    }
+
+    .task[data-hidden="true"] { display: none; }
+
+    @media (max-width: 640px) {
+      .header, .progress-wrap, .filter-bar, .main { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-top">
+    <span class="logo">semata.ai</span>
+    <span class="period-pill">June – July 2026</span>
+  </div>
+  <p class="focus-line">Quarterly workplan, June – August</p>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-wrap">
+  <span class="progress-label">Progress</span>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- Filter tabs -->
+<div class="filter-bar">
+  <button class="filter-btn active"         onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn june-btn"       onclick="setFilter('june',this)">June</button>
+  <button class="filter-btn july-btn"       onclick="setFilter('july',this)">July</button>
+  <button class="filter-btn ongoing-btn"    onclick="setFilter('ongoing',this)">Ongoing</button>
+</div>
+
+<div class="main">
+
+  <!-- North star -->
+  <div class="north-star" style="margin-top:28px">
+    <div class="north-star-label">North Star</div>
+    <p>By August, someone who has never heard of Semata can log in, find a candidate they wouldn't have found otherwise, and understand immediately why it's useful.</p>
+  </div>
+
+  <!-- Positioning -->
+  <div class="positioning">
+    <div class="positioning-label">Why this matters</div>
+    <p>Semata is the <strong>first solution to identify signals for outperformance in an AI-driven world</strong> — where skills are becoming commoditised and what will be prized are traits and inherent interests.</p>
+    <div class="signal-chips">
+      <span class="chip">Curiosity</span>
+      <span class="chip">Experimentation &amp; outcome-driven</span>
+      <span class="chip">Adaptability</span>
+      <span class="chip">Managing complexity</span>
+    </div>
+  </div>
+
+  <!-- BUILD -->
+  <div class="section" id="sec-build">
+    <div class="section-header" onclick="toggleSection('sec-build')">
+      <span class="section-title">Build</span>
+      <span class="section-sub">June → July</span>
+      <div class="section-line"></div>
+      <span class="toggle-icon">▾</span>
+    </div>
+    <div class="tasks">
+
+      <div class="task" id="t-mvp" data-month="june" onclick="toggleTask('t-mvp')">
+        <div class="check" id="c-t-mvp"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Sourcing MVP live</span>
+            <span class="badge badge-june">June</span>
+          </div>
+          <p class="task-desc">Buy the data, build self-filter UI — surfaces candidates via LinkedIn and ATS based on competency signals (traits, not just CV keywords).</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-cards" data-month="june" onclick="toggleTask('t-cards')">
+        <div class="check" id="c-t-cards"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Candidate card cleanup</span>
+            <span class="badge badge-june">June</span>
+          </div>
+          <p class="task-desc">Make candidate cards more legible and interactable — cleaner layout, surfacing the signals that matter, easier to act on.</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-payment" data-month="july" onclick="toggleTask('t-payment')">
+        <div class="check" id="c-t-payment"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Payment integration</span>
+            <span class="badge badge-july">July</span>
+            <span class="dep-tag">prereq for self-onboarding</span>
+          </div>
+          <p class="task-desc">Integrate payments so users can sign up and pay independently — unlocks the self-serve motion.</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-onboarding" data-month="july" onclick="toggleTask('t-onboarding')">
+        <div class="check" id="c-t-onboarding"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Self-serve onboarding</span>
+            <span class="badge badge-july">July</span>
+          </div>
+          <p class="task-desc">Anyone can log in, set up their roles, and get value independently — no hand-holding required.</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-flow" data-month="july" onclick="toggleTask('t-flow')">
+        <div class="check" id="c-t-flow"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Seamless sourcing + shortlisting flow</span>
+            <span class="badge badge-july">July</span>
+          </div>
+          <p class="task-desc">Single end-to-end experience from finding candidates to ranking them — sourcing and shortlisting feel like one product.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VALIDATE & SELL -->
+  <div class="section" id="sec-validate">
+    <div class="section-header" onclick="toggleSection('sec-validate')">
+      <span class="section-title">Validate &amp; Sell</span>
+      <span class="section-sub">Ongoing</span>
+      <div class="section-line"></div>
+      <span class="toggle-icon">▾</span>
+    </div>
+    <div class="tasks">
+
+      <div class="task" id="t-systemiq" data-month="ongoing" onclick="toggleTask('t-systemiq')">
+        <div class="check" id="c-t-systemiq"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">SYSTEMIQ: all roles configured, real-time updates running</span>
+            <span class="badge badge-ongoing">Ongoing</span>
+          </div>
+          <p class="task-desc">Make them a genuine success story — the proof point that the product works in the wild and that the signals translate to real hiring decisions.</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-pilots" data-month="ongoing" onclick="toggleTask('t-pilots')">
+        <div class="check" id="c-t-pilots"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">2 additional pilot clients, charged at cost</span>
+            <span class="badge badge-ongoing">Ongoing</span>
+          </div>
+          <p class="task-desc">Go out with the full sourcing + shortlisting offer once the MVP is ready. Target companies operating in AI-adjacent roles where commoditised skills are already a problem.</p>
+        </div>
+      </div>
+
+      <div class="task" id="t-pos" data-month="ongoing" onclick="toggleTask('t-pos')">
+        <div class="check" id="c-t-pos"></div>
+        <div class="task-body">
+          <div class="task-meta">
+            <span class="task-title">Build positioning in real time</span>
+            <span class="badge badge-ongoing">Ongoing</span>
+          </div>
+          <p class="task-desc">Understand what messaging resonates with people hiring in an AI world and for AI-savvy talent — what language lands, what problems they name, what they're afraid of getting wrong. These insights should feed back into everything: how we describe the product, how we position it in outreach, and what goes in the August one-pager.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- August -->
+  <div class="august">
+    <div class="august-label">↳ August horizon</div>
+    <div class="august-items">
+      <span class="august-item">Active outreach &amp; marketing</span>
+      <span class="august-item">Positioning one-pager</span>
+      <span class="august-item">Financial planning &amp; forecasting</span>
+      <span class="august-item">Scale pilot conversations</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const KEY = 'semata-workplan-v2';
+  const TASKS = ['t-mvp','t-cards','t-payment','t-onboarding','t-flow','t-systemiq','t-pilots','t-pos'];
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
+
+  function toggleTask(id) {
+    state[id] = !state[id];
+    save();
+    render();
+  }
+
+  function render() {
+    let done = 0;
+    TASKS.forEach(id => {
+      const el = document.getElementById(id);
+      const ch = document.getElementById('c-' + id);
+      if (!el || !ch) return;
+      if (state[id]) { el.classList.add('done'); ch.classList.add('checked'); done++; }
+      else           { el.classList.remove('done'); ch.classList.remove('checked'); }
+    });
+    const pct = Math.round(done / TASKS.length * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  let activeFilter = 'all';
+  function setFilter(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    TASKS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.setAttribute('data-hidden', (f !== 'all' && el.dataset.month !== f) ? 'true' : 'false');
+    });
+  }
+
+  function toggleSection(id) {
+    document.getElementById(id).classList.toggle('collapsed');
+  }
+
+  render();
+</script>
+</body>
+</html>
